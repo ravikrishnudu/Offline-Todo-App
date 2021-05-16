@@ -1,10 +1,12 @@
 import "./App.css";
-
+import Todos from "./Components/Todos";
 function App() {
   return (
-    <div>
-      <h1>todo's...</h1>
-    </div>
+    <>
+      <div>
+        <Todos />
+      </div>
+    </>
   );
 }
 
