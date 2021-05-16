@@ -1,64 +1,82 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+
+import TodoForm from "./TodoForm";
+import Todo from "./Todo";
+import Footer from "./Footer";
 import styles from "./Todos.module.css";
 
-function TodoForm({ addTodo }) {
-  const [inputValue, setInputValue] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!inputValue) return;
-    addTodo(inputValue);
-    setInputValue("");
-  };
-
-  return (
-    <div className={styles.header}>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            inputValue={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            placeholder="What need's to be done..."
-            className={styles.inputValue}
-          />
-        </form>
-      </div>
-      <div>
-        <button className={styles.resetButton}>Reset</button>
-      </div>
-    </div>
-  );
-}
-
-function Todo({ todo }) {
-  return (
-    <div className={styles.newTodos}>
-      <div className={styles.newtodo}>
-        <input type="checkbox" id="checkbox" className={styles.checkbox} />
-        <label htmlFor="checkbox">{todo.name}</label>
-      </div>
-      <div className={styles.delete}>X</div>
-    </div>
-  );
-}
-
 function Todos() {
-  const [todos, setTodos] = useState([{ name: "asdasd", done: true }]);
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    let arr = localStorage.getItem("Todos");
+
+    if (arr) {
+      let todos = JSON.parse(arr);
+      setTodos(todos);
+    }
+  }, []);
 
   const addTodo = (name) => {
-    const newTodos = [{ name }, ...todos];
+    const tags = name.split("#");
+    console.log(tags);
+    const newTodos = [
+      {
+        name: tags[0],
+        tags: [tags[1], tags[2]],
+        id: uuidv4(),
+        isCompleted: false,
+      },
+      ...todos,
+    ];
     setTodos(newTodos);
+    localStorage.setItem("Todos", JSON.stringify(newTodos));
   };
+
+  const handleCheck = (id) => {
+    console.log(id);
+    const newArray = todos.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, isCompleted: !todo.isCompleted };
+      } else {
+        return todo;
+      }
+    });
+    setTodos(newArray);
+  };
+
+  const deleteTodo = (id) => {
+    const filterArray = todos.filter((todo) => todo.id !== id);
+    setTodos(filterArray);
+    console.log(id, filterArray);
+  };
+
+  const clearCompleted = () => {
+    const filteredArray = todos.filter((todo) => todo.isCompleted !== true);
+    console.log(todos);
+    setTodos(filteredArray);
+  };
+  // let incompleteCount = todos.filter((todo) => todo.done === false).length;
 
   return (
     <div className={styles.body}>
-      <h1>todos</h1>
+      <h1>Todo's</h1>
       <TodoForm addTodo={addTodo} />
       <div className={styles.listItems}>
         {todos.map((todo) => (
-          <Todo todo={todo} key={todo.id} />
+          <Todo
+            todo={todo}
+            // id={todo.id}
+            handleCheck={handleCheck}
+            deleteTodo={deleteTodo}
+            key={todo.id}
+          />
         ))}
+        <Footer
+          clearCompleted={clearCompleted}
+          // incompleteCount={incompleteCount}
+        />
       </div>
     </div>
   );

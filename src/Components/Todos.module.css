@@ -1,10 +1,10 @@
-.body {
+/* .body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-family: sans-serif;
-}
+} */
 
 h1 {
   font-size: 100px;
@@ -19,26 +19,29 @@ h1 {
   width: 22%;
   padding: 16px 16px 16px 100px;
 }
-.header {
-  display: flex;
-  align-items: center;
-  /* justify-content: space-evenly; */
-}
-.inputValue {
+
+/* .inputValue {
   font-size: 24px;
   line-height: 22px;
   color: rgb(77, 77, 77);
-  /* width: 100%; */
+  width: 100%;
   padding: 16px 16px 16px 60px;
   border: none;
   background: rgba(0, 0, 0, 0.003);
   box-shadow: 10px 5px 5px rgb(0 0 0 / 18%);
   outline-style: none;
 }
-.resetButton {
-  padding: 10px;
-  /* margin: 0px; */
+.buttonDiv {
+  display: flex;
+  justify-content: center;
 }
+.resetButton {
+  padding: 8px;
+  background-color: rgba(175, 47, 47, 0.15);
+  margin-top: 10px;
+  border: none;
+  outline-style: none;
+} */
 .newTodos {
   display: flex;
   justify-content: space-between;

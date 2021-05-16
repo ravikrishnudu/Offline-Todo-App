@@ -1,0 +1,18 @@
+.newTodos {
+  display: flex;
+  justify-content: space-between;
+  font-size: 24px;
+  border-bottom: 1px solid #ededed;
+  padding: 2%;
+}
+
+.checkbox {
+  background-color: rgba(175, 47, 47, 0.15);
+  margin-right: 18px;
+}
+
+.delete {
+  color: #cc9a9a;
+  opacity: 1;
+  transition: color 0.2s ease-out;
+}
