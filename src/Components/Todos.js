@@ -1,18 +1,6 @@
 import React, { useState } from "react";
 import styles from "./Todos.module.css";
 
-function Todo({ todo }) {
-  return (
-    <div className={styles.listItem}>
-      <div className={styles.checkbox}>
-        <input type="checkbox" id="check-label" />
-        <label htmlFor="check-label">{todo.name}</label>
-      </div>
-      <div className={styles.delete}>X</div>
-    </div>
-  );
-}
-
 function TodoForm({ addTodo }) {
   const [inputValue, setInputValue] = useState("");
 
@@ -24,15 +12,34 @@ function TodoForm({ addTodo }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        inputValue={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        placeholder="What need's to be done..."
-        className={styles.inputValue}
-      />
-    </form>
+    <div className={styles.header}>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            inputValue={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder="What need's to be done..."
+            className={styles.inputValue}
+          />
+        </form>
+      </div>
+      <div>
+        <button className={styles.resetButton}>Reset</button>
+      </div>
+    </div>
+  );
+}
+
+function Todo({ todo }) {
+  return (
+    <div className={styles.newTodos}>
+      <div className={styles.newtodo}>
+        <input type="checkbox" id="checkbox" className={styles.checkbox} />
+        <label htmlFor="checkbox">{todo.name}</label>
+      </div>
+      <div className={styles.delete}>X</div>
+    </div>
   );
 }
 
@@ -48,7 +55,7 @@ function Todos() {
     <div className={styles.body}>
       <h1>todos</h1>
       <TodoForm addTodo={addTodo} />
-      <div>
+      <div className={styles.listItems}>
         {todos.map((todo) => (
           <Todo todo={todo} key={todo.id} />
         ))}
