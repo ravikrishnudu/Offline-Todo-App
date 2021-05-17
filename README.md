@@ -1,1 +1,1 @@
-An Offline Todo App.
+Offline Todo App.
