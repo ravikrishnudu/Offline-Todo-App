@@ -1,7 +1,16 @@
-.footerButtons {
+.footerButton {
   font-size: 15px;
   padding: 8px;
   background-color: white;
   border-style: none;
   border-radius: 1px solid lightpink;
+  background-color: rgba(175, 47, 47, 0.15);
+}
+.footerButtons {
+  border-top: 1px solid #ededed;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
 }

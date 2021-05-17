@@ -2,17 +2,13 @@ import React from "react";
 import styles from "./Footer.module.css";
 function Footer({ clearCompleted, completed, incompleteCount }) {
   return (
-    <div>
-      <button className={styles.footerButtons}>
-        {incompleteCount}
-        items left{" "}
+    <div className={styles.footerButtons}>
+      <button className={styles.footerButton}>
+        {incompleteCount} {""}
+        todo's left
       </button>
-      <button className={styles.footerButtons}>All</button>
-      <button className={styles.footerButtons}>Active</button>
-      <button className={styles.footerButtons} onClick={completed}>
-        completed
-      </button>
-      <button className={styles.footerButtons} onClick={clearCompleted}>
+
+      <button className={styles.footerButton} onClick={clearCompleted}>
         clear completed
       </button>
     </div>

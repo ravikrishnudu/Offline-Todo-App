@@ -6,14 +6,15 @@ function Todo({ todo, handleCheck, deleteTodo }) {
   const { id } = todo;
   return (
     <div className={styles.newTodos}>
-      <div className={styles.newtodo}>
+      <div>
         <input
           type="checkbox"
-          id="checkbox"
-          className={styles.checkbox}
+          id="check"
+          name="check"
           onChange={() => handleCheck(id)}
+          className={styles.checkbox}
         />
-        <label htmlFor="checkbox">{todo.name}</label>
+        <label htmlFor="check">{todo.name}</label>
       </div>
       <div className={styles.delete} onClick={() => deleteTodo(id)}>
         X

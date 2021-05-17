@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import styles from "./TodoForm.module.css";
 
-function TodoForm({ addTodo }) {
+function TodoForm({ addTodo, handleReset }) {
   const [inputValue, setInputValue] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!inputValue) return;
     addTodo(inputValue, JSON.parse(localStorage.getItem("Todos")));
-    // JSON.parse(localStorage.getItem("Todos"))
     setInputValue("");
   };
 
@@ -24,7 +23,9 @@ function TodoForm({ addTodo }) {
         />
       </form>
       <div className={styles.buttonDiv}>
-        <button className={styles.resetButton}>Reset</button>
+        <button className={styles.resetButton} onClick={handleReset}>
+          Reset All Todos
+        </button>
       </div>
     </>
   );

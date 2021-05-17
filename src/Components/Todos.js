@@ -20,7 +20,6 @@ function Todos() {
 
   const addTodo = (name) => {
     const tags = name.split("#");
-    console.log(tags);
     const newTodos = [
       {
         name: tags[0],
@@ -32,6 +31,10 @@ function Todos() {
     ];
     setTodos(newTodos);
     localStorage.setItem("Todos", JSON.stringify(newTodos));
+  };
+  const handleReset = () => {
+    localStorage.clear();
+    setTodos([]);
   };
 
   const handleCheck = (id) => {
@@ -49,7 +52,6 @@ function Todos() {
   const deleteTodo = (id) => {
     const filterArray = todos.filter((todo) => todo.id !== id);
     setTodos(filterArray);
-    console.log(id, filterArray);
   };
 
   const clearCompleted = () => {
@@ -57,17 +59,18 @@ function Todos() {
     console.log(todos);
     setTodos(filteredArray);
   };
-  // let incompleteCount = todos.filter((todo) => todo.done === false).length;
+  const incompleteCount = todos.filter(
+    (todo) => todo.isCompleted === false
+  ).length;
 
   return (
-    <div className={styles.body}>
+    <div className={styles.container}>
       <h1>Todo's</h1>
-      <TodoForm addTodo={addTodo} />
+      <TodoForm addTodo={addTodo} handleReset={handleReset} />
       <div className={styles.listItems}>
         {todos.map((todo) => (
           <Todo
             todo={todo}
-            // id={todo.id}
             handleCheck={handleCheck}
             deleteTodo={deleteTodo}
             key={todo.id}
@@ -75,7 +78,7 @@ function Todos() {
         ))}
         <Footer
           clearCompleted={clearCompleted}
-          // incompleteCount={incompleteCount}
+          incompleteCount={incompleteCount}
         />
       </div>
     </div>
